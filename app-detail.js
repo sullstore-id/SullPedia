@@ -37,14 +37,14 @@ const premiumCatalog = {
       {
         name: "Alight Motion Premium 1 Tahun Privat ANDROID",
         desc: "Layanan fast, proses otomatis",
-        price: 1000,
+        price: 5000,
         stock: 13,
   available: true
       },
       {
         name: "Alight Motion Premium 1 Tahun Privat IOS",
         desc: "Layanan fast, proses otomatis",
-        price: 1000,
+        price: 6000,
         stock: 10,
   available: true
       }
@@ -59,8 +59,8 @@ const premiumCatalog = {
         name: "CapCut Pro 1 Bulan",
         desc: "Akses fitur pro premium",
         price: 5000,
-        stock: 1,
-  available: true
+        stock: 0,
+  available: false
       },
       {
         name: "CapCut Pro 1 Tahun",
@@ -80,7 +80,7 @@ const premiumCatalog = {
         name: "Canva Premium 1b Via Invite",
         desc: "Akun desain premium",
         price: 3000,
-        stock: 29,
+        stock: 37,
   available: true
       },
       {
@@ -100,8 +100,8 @@ const premiumCatalog = {
       {
         name: "Viu Premium Life Time",
         desc: "Streaming drama dan film premium",
-        price: 7000,
-        stock: 36,
+        price: 3000,
+        stock: 52,
   available: true
       }
     ]
@@ -156,12 +156,16 @@ const premiumCatalog = {
       {
         name: "ChatGPT Sharing 1 Bulan",
         desc: "Akses akun AI premium",
-        price: 25000
+        price: 25000,
+        stock: 0,
+  available: false
       },
       {
         name: "ChatGPT Private 1 Bulan",
         desc: "Akses akun AI premium",
-        price: 50000
+        price: 50000,
+        stock: 0,
+  available: false
       }
     ]
   }
