@@ -77,7 +77,7 @@ const sosmedCatalog = {
         id: "ig-followers-700",
         name: "700 Followers Instagram Real Permanen",
         desc: "Fast proses 1-30 detik",
-        price: 3200,
+        price: 32000,
         available: true
       },
       {
