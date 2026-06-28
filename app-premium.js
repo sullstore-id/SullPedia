@@ -55,16 +55,27 @@ const premiumApps = [
   }
 ];
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "index.html";
     return;
   }
-  
-  const access = await checkMaintenanceAccess(user);
-if (!access.allowed) return;
 
-  renderApps(premiumApps);
+  try {
+    const access = await checkMaintenanceAccess(user);
+    if (!access.allowed) return;
+
+    renderApps(premiumApps);
+  } catch (error) {
+    console.error("Gagal cek maintenance:", error);
+
+    appGrid.innerHTML = `
+      <div class="empty premium-empty">
+        <h4>Gagal memuat aplikasi</h4>
+        <p>${error.message || "Terjadi kesalahan saat memuat halaman."}</p>
+      </div>
+    `;
+  }
 });
 
 searchAppInput.addEventListener("input", () => {
