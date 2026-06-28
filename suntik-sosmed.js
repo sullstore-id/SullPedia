@@ -66,26 +66,44 @@ const sosmedServices = [
   }
 ];
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "index.html";
     return;
   }
-  
-  const access = await checkMaintenanceAccess(user);
-if (!access.allowed) return;
 
-  listenSaldo(user.uid);
-  renderServices();
+  try {
+    const access = await checkMaintenanceAccess(user);
+    if (!access.allowed) return;
+
+    listenSaldo(user.uid);
+    renderServices();
+  } catch (error) {
+    console.error("Gagal cek maintenance:", error);
+
+    sosmedServiceList.innerHTML = `
+      <div class="empty premium-empty">
+        <h4>Gagal memuat layanan</h4>
+        <p>${error.message || "Terjadi kesalahan saat memuat halaman."}</p>
+      </div>
+    `;
+  }
 });
 
 function listenSaldo(uid) {
-  onSnapshot(doc(db, "users", uid), (snapshot) => {
-    if (!snapshot.exists()) return;
+  onSnapshot(
+    doc(db, "users", uid),
+    (snapshot) => {
+      if (!snapshot.exists()) return;
 
-    const data = snapshot.data();
-    sosmedSaldoText.textContent = formatRupiah(data.saldoUtama || 0);
-  });
+      const data = snapshot.data();
+      sosmedSaldoText.textContent = formatRupiah(data.saldoUtama || 0);
+    },
+    (error) => {
+      console.error("Gagal memuat saldo:", error);
+      sosmedSaldoText.textContent = "Rp 0";
+    }
+  );
 }
 
 function renderServices() {
